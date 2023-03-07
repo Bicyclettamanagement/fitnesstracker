@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessTracker", "FitnessTracker.csproj", "{74257504-F9FE-4235-B131-85F09704CC88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessTracker", "FitnessTracker.csproj", "{74257504-F9FE-4235-B131-85F09704CC88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessTrackerTests", "..\FitnessTrackerTests\FitnessTrackerTests.csproj", "{C1338444-CF32-4C41-B35A-5ABE28701221}"
+	ProjectSection(ProjectDependencies) = postProject
+		{74257504-F9FE-4235-B131-85F09704CC88} = {74257504-F9FE-4235-B131-85F09704CC88}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{74257504-F9FE-4235-B131-85F09704CC88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74257504-F9FE-4235-B131-85F09704CC88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74257504-F9FE-4235-B131-85F09704CC88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1338444-CF32-4C41-B35A-5ABE28701221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1338444-CF32-4C41-B35A-5ABE28701221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1338444-CF32-4C41-B35A-5ABE28701221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1338444-CF32-4C41-B35A-5ABE28701221}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

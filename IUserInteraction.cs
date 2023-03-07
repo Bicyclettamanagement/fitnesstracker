@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker
 {
-    public interface IExercise
+    public interface IUserInteraction
     {
-        string Name { get; set; }
-        string Description { get; set; }
+        public void Write(string message);
+        public string? Read();
     }
 }

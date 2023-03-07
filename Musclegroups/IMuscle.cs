@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker.Musclegroups
 {
-    internal interface IMuscle
+    public interface IMuscle
     {
         string Name { get; set; }
     }

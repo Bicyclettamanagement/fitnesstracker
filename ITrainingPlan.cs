@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker
 {
-    internal interface ITrainingPlan
+    public interface ITrainingPlan
     {
+        public List<IExercise> Exercises { get; set; }
     }
 }
