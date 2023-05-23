@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker
 {
-    public class FitnessTrackerClient
+    public class FitnessTrackerManager
     {
         public Athlete? User;
         public IUserInteraction ui;
         public IDbManager db;
-        public FitnessTrackerClient(IUserInteraction ui, IDbManager db)
+        public FitnessTrackerManager(IUserInteraction ui, IDbManager db)
         {
             this.ui = ui;
             this.db = db;
@@ -22,7 +22,13 @@ namespace FitnessTracker
         {
             ui.Write("Welcome to Fitnesstracker!");
             ui.Write("Please enter your Username:");
-            this.User = this.LoginSuccessful(ui.Read());
+            string? username = null;
+            while(username == null)
+            {
+                username = ui.Read();
+
+            }
+            this.User = this.LoginSuccessful(username);
             this.StartMenu();
         }
         public void Stop()
@@ -30,7 +36,7 @@ namespace FitnessTracker
             ui.Write("Exiting...");
             Environment.Exit(0);
         }
-        public Athlete LoginSuccessful(string? username)
+        public Athlete LoginSuccessful(string username)
         {
             if (db.UsernameExists(username))
             {

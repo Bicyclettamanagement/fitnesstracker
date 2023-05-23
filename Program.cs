@@ -2,6 +2,6 @@
 using FitnessTracker;
 var ui = new UserInteraction();
 var db = new DbManager();
-var fitnesstracker = new FitnessTrackerClient(ui, db);
+var fitnesstracker = new FitnessTrackerManager(ui, db);
 
 fitnesstracker.Start();
