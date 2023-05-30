@@ -9,7 +9,8 @@ namespace FitnessTracker.Adapter
 {
     public interface IUserRepository
     {
-        bool Create(User user);
+        void Create(User user);
+        void Delete(int userId);
         void Update(User user);
         User GetById(int userId);
         List<User> GetAll();

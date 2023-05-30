@@ -13,7 +13,7 @@ namespace FitnessTracker.Adapter
 
         public void Add(Workout workout)
         {
-            int workoutId = GetHighestWorkoutId() +1;
+            int workoutId = GetHighestId() +1;
             foreach (var exercise in workout.PerformedExercises)
             {
                 string data = $"{workoutId}{workout.UserId},{workout.Name}{workout.Date},{exercise},{exercise.Repetitions},{exercise.Weight}";
@@ -96,8 +96,7 @@ namespace FitnessTracker.Adapter
                             workoutDictionary.Add(workoutId, workout);
                         }
 
-                        Workout existingWorkout = workoutDictionary[workoutId];
-                        existingWorkout.AddExercise(exercise);
+                        workoutDictionary[workoutId].AddExercise(exercise);
                     }
                 }
 
@@ -170,7 +169,7 @@ namespace FitnessTracker.Adapter
             }
 
         }
-        private int GetHighestWorkoutId()
+        private int GetHighestId()
         {
             int highestId = 0;
 
