@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker.Application
 {
-    public class WorkoutService
+    public class WorkoutService : IWorkoutService
     {
         private readonly IWorkoutRepository _workoutRepository;
 

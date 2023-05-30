@@ -13,7 +13,8 @@ namespace FitnessTracker.Adapter
         void Update(User user);
         User GetById(int userId);
         List<User> GetAll();
-        User GetUserByUsernameAndPassword(string username, string password);
+        User GetUserByUsername(string username);
+        // User GetUserByUsernameAndPassword(string username, string password);
     }
 
 }

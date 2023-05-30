@@ -37,5 +37,5 @@ namespace FitnessTracker.Application
             return _userRepository.GetAll();
         }
     }
-
+    
 }

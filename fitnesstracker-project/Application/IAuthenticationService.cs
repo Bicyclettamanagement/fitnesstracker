@@ -8,7 +8,7 @@ namespace FitnessTracker.Application
 {
     public interface IAuthenticationService
     {
-        bool Login(string username, string password);
+        bool LoginSuccessful(string username, string password);
         void Logout();
     }
 

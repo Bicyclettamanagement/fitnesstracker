@@ -1,4 +1,5 @@
 ﻿using FitnessTracker.Adapter;
+using FitnessTracker.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace FitnessTracker.Application
         {
             _userRepository = userRepository;
         }
-        public bool Login(string username, string password)
+        public bool LoginSuccessful(string username, string password)
         {
-            if(_userRepository.GetUserByUsernameAndPassword(username, password)!= null)
-            {
-                return true;
-            } else { return false; }
+            var user = _userRepository.GetUserByUsername(username);
+            return user != null && user.Password == password;
+        }
+        public void RegistrationSuccessful(User user)
+        {
+            _userRepository.Create(user);
         }
 
         public void Logout()
