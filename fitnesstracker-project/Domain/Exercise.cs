@@ -12,13 +12,10 @@ namespace FitnessTracker.Domain
         public int ExerciseId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Muscle> Agonists;
-        public List<Muscle> Synergists;
+        public List<int> Agonists;
+        public List<int> Synergists;
         public bool IsUnilateral { get; set; }
-        public float CurrentWeight { get; set; }
-        public int CurrentReps { get; set; }
-        public float OneRepMax { get; set; }
-        public string Notes { get; set; }
+        public int? OneRepMax { get; set; }
 
 
 
@@ -26,19 +23,44 @@ namespace FitnessTracker.Domain
         {
             Name = name;
             Description = "";
-            Agonists = new List<Muscle>();
-            Synergists = new List<Muscle>();
+            Agonists = new();
+            Synergists = new();
             IsUnilateral = false;
-            Notes = "";
         }
-        public Exercise(string name, string description, List<Muscle> agonists, List<Muscle> synergists, bool isUnilateral)
+        public Exercise(string name, string description, bool isUnilateral, int oneRepMax)
+        {
+            Name = name;
+            Description = description;
+            Agonists = new();
+            Synergists = new();
+            IsUnilateral = isUnilateral;
+            OneRepMax = oneRepMax;
+        }
+        public Exercise(string name, string description, List<int> agonists, List<int> synergists, bool isUnilateral)
         {
             Name = name;
             Description = description;
             Agonists = agonists;
             Synergists = synergists;
             IsUnilateral = isUnilateral;
-            Notes = "";
+        }
+        public Exercise(string name, string description, List<int> agonists, List<int> synergists, bool isUnilateral,int oneRepMax)
+        {
+            Name = name;
+            Description = description;
+            Agonists = agonists;
+            Synergists = synergists;
+            IsUnilateral = isUnilateral;
+            OneRepMax = oneRepMax;
+
+        }
+        public void AddAgonist(int agonist)
+        {
+            Agonists.Add(agonist);
+        }
+        public void AddSynergist(int synergist)
+        {
+            Synergists.Add(synergist);
         }
 
     }

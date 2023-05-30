@@ -93,6 +93,7 @@ namespace FitnessTracker.Adapter
                         if (!workoutDictionary.ContainsKey(workoutId))
                         {
                             Workout workout = new Workout(workoutId, name, date);
+                            workout.Id= workoutId;
                             workoutDictionary.Add(workoutId, workout);
                         }
 
