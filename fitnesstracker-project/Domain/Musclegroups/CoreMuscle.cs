@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker.Domain.Musclegroups
 {
-    internal class CoreMuscle : Muscle
+    public class CoreMuscle : Muscle
     {
         public CoreMuscle(string name) : base(name)
         {

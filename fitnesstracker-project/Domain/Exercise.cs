@@ -7,7 +7,7 @@ using FitnessTracker.Domain.Musclegroups;
 
 namespace FitnessTracker.Domain
 {
-    internal class Exercise : IExercise
+    public class Exercise : IExercise
     {
         public int ExerciseId { get; set; }
         public string Name { get; set; }

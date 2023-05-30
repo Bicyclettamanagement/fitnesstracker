@@ -9,15 +9,18 @@ namespace FitnessTracker.Domain
 {
     public class User
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public DateTime Birthday { get; }
         public float Weight { get; set; }
-        public List<IMuscle>? TrainedMuscles;
+        public List<Muscle>? TrainedMuscles;
         public List<ITrainingPlan>? TrainingPlans;
 
-        public User(string name, DateTime birthday, float weight)
+        public User(string name, string password, DateTime birthday, float weight)
         {
-            Name = name;
+            Username = name;
+            Password = password;
             Birthday = new DateTime(birthday.Year, birthday.Month, birthday.Day);
             Weight = weight;
         }
