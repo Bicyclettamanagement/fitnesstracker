@@ -9,12 +9,12 @@ namespace FitnessTracker.Adapter
 {
     public class UserRepository : IUserRepository
     {
-        private const string FilePath = @"data\users.csv";
+        private const string FilePath = @"./data/users.csv";
         public void Create(User user)
         {
             int userId = GetHighestId() + 1;
 
-            string data = $"{userId}{user.Username},{user.Password}{user.Birthday.ToShortDateString},{user.Weight}";
+            string data = $"{userId}{user.Username},{user.Password},{user.Birthday.ToShortDateString},{user.Weight}";
 
             using (StreamWriter writer = new StreamWriter(FilePath, true))
             {
@@ -215,7 +215,7 @@ namespace FitnessTracker.Adapter
         {
             int highestId = 0;
 
-            using (StreamReader reader = new StreamReader("workouts.csv"))
+            using (StreamReader reader = new StreamReader("users.csv"))
             {
                 // Überspringen der Kopfzeile
                 reader.ReadLine();

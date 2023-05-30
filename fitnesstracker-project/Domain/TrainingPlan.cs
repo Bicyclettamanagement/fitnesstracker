@@ -10,12 +10,21 @@ namespace FitnessTracker.Domain
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Exercise> Exercises { get; set; }
+        public List<int> Exercises { get; set; }
 
-        public TrainingPlan(string name, List<Exercise> exercises)
+        public TrainingPlan(string name)
+        {
+            Name = name;
+            Exercises = new();
+        }
+        public TrainingPlan(string name, List<int> exercises)
         {
             Name = name;
             Exercises = exercises;
+        }
+        public void AddExercise(int exercise)
+        {
+            Exercises.Add(exercise);
         }
     }
 

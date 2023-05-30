@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker.Adapter
 {
-    public class WorkoutRepository : IWorkoutRepository
+    public class TrainingPlanRepository : ITrainingPlanRepository
     {
-        private const string FilePath = @"./data/workouts.csv";
-
-        public void Add(Workout workout)
+        private const string FilePath = @"./data/trainingPlans.csv";
+        //TrainingPlan(string name, List<Exercise> exercises)
+        public void Save(TrainingPlan trainingPlan)
         {
-            int workoutId = GetHighestId() +1;
-            foreach (var exercise in workout.PerformedExercises)
+            int trainingPlanId = GetHighestId() + 1;
+            foreach (var exercise in trainingPlan.Exercises)
             {
-                string data = $"{workoutId}{workout.UserId},{workout.Name},{workout.Date},{exercise},{exercise.Repetitions},{exercise.Weight}";
+                string data = $"{trainingPlanId}{trainingPlan.Name},{exercise}";
 
                 using (StreamWriter writer = new StreamWriter(FilePath, true))
                 {
@@ -25,14 +25,14 @@ namespace FitnessTracker.Adapter
             }
         }
 
-        public void Delete(int workoutId)
+        public void Delete(int trainingPlanId)
         {
             List<string> lines = File.ReadAllLines(FilePath).ToList();
 
             // Überspringen der Kopfzeile
             lines.RemoveAt(0);
 
-            bool workoutDeleted = false;
+            bool trainingPlanDeleted = false;
 
             for (int i = lines.Count - 1; i >= 0; i--)
             {
@@ -41,30 +41,29 @@ namespace FitnessTracker.Adapter
 
                 if (fields.Length >= 2)
                 {
-                    int currentWorkoutId = int.Parse(fields[0]);
+                    int currentTrainingPlanId = int.Parse(fields[0]);
 
-                    if (currentWorkoutId == workoutId)
+                    if (currentTrainingPlanId == trainingPlanId)
                     {
                         lines.RemoveAt(i);
-                        workoutDeleted = true;
+                        trainingPlanDeleted = true;
                     }
                 }
             }
 
-            if (workoutDeleted)
+            if (trainingPlanDeleted)
             {
                 // Aktualisierte Daten zurück in die CSV-Datei schreiben
                 File.WriteAllLines(FilePath, lines);
             }
             else
             {
-                throw new Exception("WorkoutId not found");
+                throw new Exception("TrainingPlanId not found");
             }
         }
-
-        public List<Workout> GetAllWorkouts()
+        public List<TrainingPlan> GetAll()
         {
-            List<Workout> workouts = new List<Workout>();
+            List<TrainingPlan> trainingPlans = new List<TrainingPlan>();
 
             using (StreamReader reader = new StreamReader(FilePath))
             {
@@ -72,7 +71,7 @@ namespace FitnessTracker.Adapter
                 reader.ReadLine();
 
                 // Dictionary zur temporären Speicherung der Workout-IDs und zugehörigen Workouts erstellen
-                Dictionary<int, Workout> workoutDictionary = new Dictionary<int, Workout>();
+                Dictionary<int, TrainingPlan> trainingPlanDictionary = new Dictionary<int, TrainingPlan>();
 
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -81,35 +80,30 @@ namespace FitnessTracker.Adapter
 
                     if (fields.Length >= 5)
                     {
-                        int workoutId = int.Parse(fields[0]);
+                        int trainingPlanId = int.Parse(fields[0]);
                         string name = fields[1];
-                        DateTime date = DateTime.Parse(fields[2]);
-                        int exerciseId = int.Parse(fields[3]);
-                        int repetitions = int.Parse(fields[4]);
-                        int weight = int.Parse(fields[5]);
-                        var exercise = new PerformedExercise(exerciseId, repetitions, weight);
-
+                        int exerciseId = int.Parse(fields[2]);
                         
-                        if (!workoutDictionary.ContainsKey(workoutId))
+                        if (!trainingPlanDictionary.ContainsKey(trainingPlanId))
                         {
-                            Workout workout = new Workout(workoutId, name, date);
-                            workout.Id= workoutId;
-                            workoutDictionary.Add(workoutId, workout);
+                            TrainingPlan trainingPlan = new TrainingPlan(name);
+                            trainingPlan.Id = trainingPlanId;
+                            trainingPlanDictionary.Add(trainingPlanId, trainingPlan);
                         }
 
-                        workoutDictionary[workoutId].AddExercise(exercise);
+                        trainingPlanDictionary[trainingPlanId].AddExercise(exerciseId);
                     }
                 }
 
-                workouts.AddRange(workoutDictionary.Values);
+                trainingPlans.AddRange(trainingPlanDictionary.Values);
             }
 
-            return workouts;
+            return trainingPlans;
         }
 
-        public Workout GetById(int workoutId)
+        public TrainingPlan GetById(int trainingPlanId)
         {
-            Workout? workout = null;
+            TrainingPlan? trainingPlan = null;
             List<string> lines = File.ReadAllLines(FilePath).ToList();
 
             // Überspringen der Kopfzeile
@@ -118,63 +112,61 @@ namespace FitnessTracker.Adapter
             {
                 string line = lines[i];
                 string[] fields = line.Split(',');
-                
+
 
                 if (fields.Length >= 2)
                 {
-                    int currentWorkoutId = int.Parse(fields[0]);
+                    int currentTrainingPlanId = int.Parse(fields[0]);
 
-                    if (currentWorkoutId == workoutId)
+                    if (currentTrainingPlanId == trainingPlanId)
                     {
-                        if (workout == null)
+                        if (trainingPlan == null)
                         {
                             string name = fields[1];
-                            DateTime date = DateTime.Parse(fields[2]);
-                            workout = new Workout(workoutId, name, date);
+                            trainingPlan = new TrainingPlan(name);
+                            trainingPlan.Id = trainingPlanId;
                         }
-                        
-                        int exerciseId = int.Parse(fields[3]);
-                        int repetitions = int.Parse(fields[4]);
-                        int weight = int.Parse(fields[5]);
-                        var exercise = new PerformedExercise(exerciseId, repetitions, weight);
-                        workout.AddExercise(exercise);
 
-                        
-                        
+                        int exerciseId = int.Parse(fields[2]);
+                        trainingPlan.AddExercise(exerciseId);
+
+
+
                     }
                 }
             }
 
-            if (workout != null)
+            if (trainingPlan != null)
             {
-                return workout;
+                return trainingPlan;
             }
             else
             {
-                throw new Exception("WorkoutId not found");
+                throw new Exception("TrainingPlanId not found");
             }
         }
 
 
-        public void Update(Workout workout)
+        public void Update(TrainingPlan trainingPlan)
         {
-            Delete(workout.Id);
-            foreach (var exercise in workout.PerformedExercises)
+            Delete(trainingPlan.Id);
+            foreach (var exercise in trainingPlan.Exercises)
             {
-                string data = $"{workout.Id}{workout.UserId},{workout.Name}{workout.Date},{exercise},{exercise.Repetitions},{exercise.Weight}";
+                string data = $"{trainingPlan.Id}{trainingPlan.Name},{exercise}";
 
                 using (StreamWriter writer = new StreamWriter(FilePath, true))
                 {
                     writer.WriteLine(data);
                 }
             }
-
         }
+
+        
         private int GetHighestId()
         {
             int highestId = 0;
 
-            using (StreamReader reader = new StreamReader("workouts.csv"))
+            using (StreamReader reader = new StreamReader("trainingPlans.csv"))
             {
                 // Überspringen der Kopfzeile
                 reader.ReadLine();
@@ -198,7 +190,5 @@ namespace FitnessTracker.Adapter
 
             return highestId;
         }
-
     }
-
 }

@@ -15,7 +15,7 @@ namespace FitnessTracker.Application
         {
             _trainingPlanRepository= trainingPlanRepository;
         }
-        public void CreateTrainingPlan(string name, List<Exercise> exercises)
+        public void CreateTrainingPlan(string name, List<int> exercises)
         {
             TrainingPlan trainingPlan = new TrainingPlan(name, exercises);
             // todo

@@ -9,10 +9,11 @@ namespace FitnessTracker.Adapter
 {
     public interface ITrainingPlanRepository
     {
-        void SaveTrainingPlan(TrainingPlan trainingPlan);
-        TrainingPlan GetTrainingPlanById(int id);
-        void UpdateTrainingPlan(TrainingPlan trainingPlan);
-        void DeleteTrainingPlan(TrainingPlan trainingPlan);
+        void Save(TrainingPlan trainingPlan);
+        List<TrainingPlan> GetAll();
+        TrainingPlan GetById(int id);
+        void Update(TrainingPlan trainingPlan);
+        void Delete(int trainingPlanId);
         
     }
 

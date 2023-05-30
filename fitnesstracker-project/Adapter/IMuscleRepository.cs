@@ -10,6 +10,7 @@ namespace FitnessTracker.Adapter
 {
     public interface IMuscleRepository
     {
+        
         void Add(Muscle muscle);
         void Delete(int muscleId);
         Muscle GetById(int muscleId);

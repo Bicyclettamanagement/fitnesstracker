@@ -17,7 +17,7 @@ namespace FitnessTracker.Adapter
             foreach (var agonist in exercise.Agonists)
             {
                 // public Exercise(string name, string description, List<Muscle> agonists, List<Muscle> synergists, bool isUnilateral, int oneRepMax)
-                string data = $"{exerciseId}{exercise.Name},{exercise.Description}{agonist},{""},{exercise.IsUnilateral},{exercise.OneRepMax}";
+                string data = $"{exerciseId}{exercise.Name},{exercise.Description},{agonist},{""},{exercise.IsUnilateral},{exercise.OneRepMax}";
                 using (StreamWriter writer = new StreamWriter(FilePath, true))
                 {
                     writer.WriteLine(data);
@@ -25,7 +25,7 @@ namespace FitnessTracker.Adapter
             }
             foreach (var synergist in exercise.Synergists)
             {
-                string data = $"{exerciseId}{exercise.Name},{exercise.Description}{""},{synergist},{exercise.IsUnilateral},{exercise.OneRepMax}";
+                string data = $"{exerciseId}{exercise.Name},{exercise.Description},{""},{synergist},{exercise.IsUnilateral},{exercise.OneRepMax}";
 
                 using (StreamWriter writer = new StreamWriter(FilePath, true))
                 {
@@ -214,7 +214,7 @@ namespace FitnessTracker.Adapter
         {
             int highestId = 0;
 
-            using (StreamReader reader = new StreamReader("workouts.csv"))
+            using (StreamReader reader = new StreamReader("exercises.csv"))
             {
                 // Überspringen der Kopfzeile
                 reader.ReadLine();
