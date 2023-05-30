@@ -20,9 +20,9 @@ namespace FitnessTracker.Application
             var user = _userRepository.GetUserByUsername(username);
             return user != null && user.Password == password;
         }
-        public void RegistrationSuccessful(User user)
+        public bool RegistrationSuccessful(User user)
         {
-            _userRepository.Create(user);
+            return _userRepository.Create(user);
         }
 
         public void Logout()

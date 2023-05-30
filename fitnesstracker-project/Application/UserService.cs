@@ -16,6 +16,10 @@ namespace FitnessTracker.Application
         {
             _userRepository = userRepository;
         }
+        public bool UserExists(string username)
+        {
+            return _userRepository.Exists(username);
+        }
 
         public void CreateUser(User user)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker.Adapter
 {
-    public class ConsoleUserInterface
+    public class StartUserInterface
     {
         private readonly UserService _userService;
         private readonly AuthenticationService _authenticationService;
@@ -15,7 +15,7 @@ namespace FitnessTracker.Adapter
         private readonly TrainingPlanService _trainingPlanService;
 
 
-        public ConsoleUserInterface(UserService userService, WorkoutService workoutService, TrainingPlanService trainingPlanService, AuthenticationService authenticationService)
+        public StartUserInterface(UserService userService, WorkoutService workoutService, TrainingPlanService trainingPlanService, AuthenticationService authenticationService)
         {
             _userService = userService;
             _workoutService = workoutService;
@@ -40,10 +40,15 @@ namespace FitnessTracker.Adapter
                 switch (input)
                 {
                     case ConsoleKey.D1:
-                        Login();
+                        var loginUseCase = new LoginUseCase(_authenticationService);
+                        var loginUserInterface = new LoginUserInterface(loginUseCase);
+                        loginUserInterface.ShowLoginScreen();
                         break;
                     case ConsoleKey.D2:
-                        Register();
+                        var registerUseCase = new RegisterUseCase(_userService, _authenticationService);
+                        var registerUserInterface = new RegisterUserInterface(registerUseCase);
+                        registerUserInterface.ShowRegisterScreen();
+
                         break;
                     case ConsoleKey.Escape:
                         isRunning = false;
@@ -55,53 +60,6 @@ namespace FitnessTracker.Adapter
             }
         }
 
-        private void Login()
-        {
-            Console.WriteLine("Enter username:");
-            string username = Console.ReadLine();
-            Console.WriteLine("Enter password:");
-            string password = Console.ReadLine();
-
-            
-            bool isAuthenticated = _authenticationService.LoginSuccessful(username, password);
-
-            if (isAuthenticated)
-            {
-                Console.WriteLine("Login successful!");
-                // todo
-            }
-            else
-            {
-                Console.WriteLine("Invalid username or password. Please try again.");
-            }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-        }
-
-        private void Register()
-        {
-            Console.WriteLine("Enter username:");
-            string username = Console.ReadLine();
-            Console.WriteLine("Enter password:");
-            string password = Console.ReadLine();
-
-            
-            bool isRegistered = _authenticationService.Register(username, password);
-
-            if (isRegistered)
-            {
-                Console.WriteLine("Registration successful!");
-                // todo
-            }
-            else
-            {
-                Console.WriteLine("Username already exists. Please try again with a different username.");
-            }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-        }
 
         private void CreateWorkout()
         {
