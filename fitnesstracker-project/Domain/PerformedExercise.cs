@@ -10,6 +10,13 @@ namespace FitnessTracker.Domain
     {
         public int ExerciseId { get; set; }
         public int Repetitions { get; set; }
-        public double Weight { get; set; }
+        public int Weight { get; set; }
+
+        public PerformedExercise(int exerciseId, int repetitions, int weight) 
+        {
+            ExerciseId = exerciseId;
+            Repetitions = repetitions;
+            Weight = weight;
+        }
     }
 }

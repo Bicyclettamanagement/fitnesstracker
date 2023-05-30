@@ -17,7 +17,7 @@ namespace FitnessTracker.Application
             _workoutRepository = workoutRepository;
         }
 
-        public void AddWorkout(Workout workout)
+        public void SaveWorkout(Workout workout)
         {
             _workoutRepository.Add(workout);
         }
@@ -39,7 +39,7 @@ namespace FitnessTracker.Application
 
         public List<Workout> GetAllWorkouts()
         {
-            return _workoutRepository.GetAll();
+            return _workoutRepository.GetAllWorkouts();
         }
     }
 

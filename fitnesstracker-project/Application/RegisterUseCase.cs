@@ -1,6 +1,7 @@
 ﻿using FitnessTracker.Domain;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,15 @@ namespace FitnessTracker.Application
             {
                 throw new InvalidOperationException("Der Benutzername ist bereits vergeben.");
             }
+            if (username == null) 
+            {
+                throw new ArgumentNullException("The username must not be empty");
+            }
+            if (password == null)
+            {
+                throw new ArgumentNullException("The password must not be empty");
+            }
+            
 
 
             User user = new User(username, password, convertStringToDateTime(birthday), convertStringToFloat(weight));
@@ -33,10 +43,14 @@ namespace FitnessTracker.Application
 
             _authenticationService.LoginSuccessful(username, password);
         }
-        private DateTime convertStringToDateTime(string value)
+        private DateTime convertStringToDateTime(string dateString)
         {
-            DateTime date= DateTime.strptime(); //todo
-            return date;
+            string format = "dd.MM.yyyy";
+            DateTime date;
+            if (DateTime.TryParseExact(dateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                return date;
+            } else { throw new Exception("Invalid birthday date. Please use the format dd.mm.yyyy"); }
         }
         private float convertStringToFloat(string value)
         {

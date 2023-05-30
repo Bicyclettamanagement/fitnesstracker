@@ -13,7 +13,7 @@ namespace FitnessTracker.Adapter
         void Update(Workout workout);
         void Delete(int workoutId);
         Workout GetById(int workoutId);
-        List<Workout> GetAll();
+        List<Workout> GetAllWorkouts();
     }
 
 }

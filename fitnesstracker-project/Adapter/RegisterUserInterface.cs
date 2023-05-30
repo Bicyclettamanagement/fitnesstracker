@@ -25,7 +25,7 @@ namespace FitnessTracker.Adapter
             string username = Console.ReadLine();
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
-            Console.WriteLine("Enter your Birthday");
+            Console.WriteLine("Enter your Birthday using the format dd.mm.yyyy");
             string birthday = Console.ReadLine();
             Console.WriteLine("Enter your current weight");
             string weight = Console.ReadLine();
