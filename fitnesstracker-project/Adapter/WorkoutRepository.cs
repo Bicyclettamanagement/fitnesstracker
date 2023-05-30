@@ -9,14 +9,30 @@ namespace FitnessTracker.Adapter
 {
     public class WorkoutRepository : IWorkoutRepository
     {
-        private const string FilePath = @"./data/workouts.csv";
+        private const string FolderPath = @"./data/";
+        private string FilePath;
+        public WorkoutRepository()
+        {
+            this.FilePath = Path.Combine(FolderPath, "workouts.csv");
+            if (!File.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FolderPath);
+                File.Create(FilePath).Dispose();
+                string data = $"WorkoutId,UserId,Name,Date,Exercise,Repetitions,Weight";
+                using (StreamWriter writer = new StreamWriter(FilePath, true))
+                {
+                    writer.WriteLine(data);
+                }
+            }
+
+        }
 
         public void Add(Workout workout)
         {
             int workoutId = GetHighestId() +1;
             foreach (var exercise in workout.PerformedExercises)
             {
-                string data = $"{workoutId}{workout.UserId},{workout.Name},{workout.Date},{exercise},{exercise.Repetitions},{exercise.Weight}";
+                string data = $"{workoutId},{workout.UserId},{workout.Name},{workout.Date.ToShortTimeString()},{exercise},{exercise.Repetitions},{exercise.Weight}";
 
                 using (StreamWriter writer = new StreamWriter(FilePath, true))
                 {
@@ -174,7 +190,7 @@ namespace FitnessTracker.Adapter
         {
             int highestId = 0;
 
-            using (StreamReader reader = new StreamReader("workouts.csv"))
+            using (StreamReader reader = new StreamReader(FilePath))
             {
                 // Überspringen der Kopfzeile
                 reader.ReadLine();

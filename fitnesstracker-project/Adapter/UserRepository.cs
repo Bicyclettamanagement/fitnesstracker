@@ -9,12 +9,28 @@ namespace FitnessTracker.Adapter
 {
     public class UserRepository : IUserRepository
     {
-        private const string FilePath = @"./data/users.csv";
+        private const string FolderPath = @"./data/";
+        private string FilePath;
+        public UserRepository()
+        {
+            this.FilePath = Path.Combine(FolderPath, "users.csv");
+            if (!File.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FolderPath);
+                File.Create(FilePath).Dispose();
+                string data = $"UserId,Username,Password,Birthday,Weight";
+                using (StreamWriter writer = new StreamWriter(FilePath, true))
+                {
+                    writer.WriteLine(data);
+                }
+            }
+            
+        }
         public void Create(User user)
         {
             int userId = GetHighestId() + 1;
 
-            string data = $"{userId}{user.Username},{user.Password},{user.Birthday.ToShortDateString},{user.Weight}";
+            string data = $"{userId},{user.Username},{user.Password},{user.Birthday.ToShortDateString()},{user.Weight}";
 
             using (StreamWriter writer = new StreamWriter(FilePath, true))
             {
@@ -28,26 +44,31 @@ namespace FitnessTracker.Adapter
             bool exists = false;
             List<string> lines = File.ReadAllLines(FilePath).ToList();
 
-            // Überspringen der Kopfzeile
-            lines.RemoveAt(0);
-            for (int i = lines.Count - 1; i >= 0; i--)
+            
+            if (lines.Count > 0)
             {
-                string line = lines[i];
-                string[] fields = line.Split(',');
-
-
-                if (fields.Length >= 2)
+                // Überspringen der Kopfzeile
+                lines.RemoveAt(0);
+                for (int i = lines.Count - 1; i >= 0; i--)
                 {
-                    string currentUsername = fields[1];
+                    string line = lines[i];
+                    string[] fields = line.Split(',');
 
-                    if (currentUsername.Equals(username))
+
+                    if (fields.Length >= 2)
                     {
-                        exists = true;
-                        break;
+                        string currentUsername = fields[1];
+
+                        if (currentUsername.Equals(username))
+                        {
+                            exists = true;
+                            break;
+                        }
                     }
                 }
+                return exists;
             }
-            return exists;
+            return false;
         }
 
         public List<User> GetAll()
@@ -140,7 +161,7 @@ namespace FitnessTracker.Adapter
 
                 if (fields.Length >= 2)
                 {
-                    string currentUsername = fields[0];
+                    string currentUsername = fields[1];
 
                     if (currentUsername.Equals(username))
                     {
@@ -215,7 +236,7 @@ namespace FitnessTracker.Adapter
         {
             int highestId = 0;
 
-            using (StreamReader reader = new StreamReader("users.csv"))
+            using (StreamReader reader = new StreamReader(FilePath))
             {
                 // Überspringen der Kopfzeile
                 reader.ReadLine();

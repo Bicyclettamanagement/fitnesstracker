@@ -10,14 +10,30 @@ namespace FitnessTracker.Adapter
 {
     public class ExerciseRepository : IExerciseRepository
     {
-        private const string FilePath = @"data\exercises.csv";
+        private const string FolderPath = @"./data/";
+        private string FilePath;
+        public ExerciseRepository()
+        {
+            this.FilePath = Path.Combine(FolderPath, "exercises.csv");
+            if (!File.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FolderPath);
+                File.Create(FilePath).Dispose();
+                string data = $"ExerciseId,Name,Description,Agonist,Synergist,IsUnilateral,OneRepMax";
+                using (StreamWriter writer = new StreamWriter(FilePath, true))
+                {
+                    writer.WriteLine(data);
+                }
+            }
+
+        }
         public void Add(Exercise exercise)
         {
             int exerciseId = GetHighestId() + 1;
             foreach (var agonist in exercise.Agonists)
             {
                 // public Exercise(string name, string description, List<Muscle> agonists, List<Muscle> synergists, bool isUnilateral, int oneRepMax)
-                string data = $"{exerciseId}{exercise.Name},{exercise.Description},{agonist},{""},{exercise.IsUnilateral},{exercise.OneRepMax}";
+                string data = $"{exerciseId},{exercise.Name},{exercise.Description},{agonist},{""},{exercise.IsUnilateral},{exercise.OneRepMax}";
                 using (StreamWriter writer = new StreamWriter(FilePath, true))
                 {
                     writer.WriteLine(data);
@@ -25,7 +41,7 @@ namespace FitnessTracker.Adapter
             }
             foreach (var synergist in exercise.Synergists)
             {
-                string data = $"{exerciseId}{exercise.Name},{exercise.Description},{""},{synergist},{exercise.IsUnilateral},{exercise.OneRepMax}";
+                string data = $"{exerciseId},{exercise.Name},{exercise.Description},{""},{synergist},{exercise.IsUnilateral},{exercise.OneRepMax}";
 
                 using (StreamWriter writer = new StreamWriter(FilePath, true))
                 {
@@ -214,7 +230,7 @@ namespace FitnessTracker.Adapter
         {
             int highestId = 0;
 
-            using (StreamReader reader = new StreamReader("exercises.csv"))
+            using (StreamReader reader = new StreamReader(FilePath))
             {
                 // Überspringen der Kopfzeile
                 reader.ReadLine();

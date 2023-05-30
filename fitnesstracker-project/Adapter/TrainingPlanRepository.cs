@@ -9,14 +9,29 @@ namespace FitnessTracker.Adapter
 {
     public class TrainingPlanRepository : ITrainingPlanRepository
     {
-        private const string FilePath = @"./data/trainingPlans.csv";
-        //TrainingPlan(string name, List<Exercise> exercises)
+        private const string FolderPath = @"./data/";
+        private string FilePath;
+        public TrainingPlanRepository()
+        {
+            this.FilePath = Path.Combine(FolderPath, "trainingPlans.csv");
+            if (!File.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FolderPath);
+                File.Create(FilePath).Dispose();
+                string data = $"TrainingPlanId,Name,Exercise";
+                using (StreamWriter writer = new StreamWriter(FilePath, true))
+                {
+                    writer.WriteLine(data);
+                }
+            }
+
+        }
         public void Save(TrainingPlan trainingPlan)
         {
             int trainingPlanId = GetHighestId() + 1;
             foreach (var exercise in trainingPlan.Exercises)
             {
-                string data = $"{trainingPlanId}{trainingPlan.Name},{exercise}";
+                string data = $"{trainingPlanId},{trainingPlan.Name},{exercise}";
 
                 using (StreamWriter writer = new StreamWriter(FilePath, true))
                 {
@@ -166,7 +181,7 @@ namespace FitnessTracker.Adapter
         {
             int highestId = 0;
 
-            using (StreamReader reader = new StreamReader("trainingPlans.csv"))
+            using (StreamReader reader = new StreamReader(FilePath))
             {
                 // Überspringen der Kopfzeile
                 reader.ReadLine();
