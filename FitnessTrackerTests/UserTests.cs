@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using FitnessTracker;
+using FitnessTracker.Domain;
 
 namespace FitnessTrackerTests
 {
-    public class AthleteTests
+    public class UserTests
     {
         [Theory]
         [InlineData(20010227)]
@@ -17,7 +17,7 @@ namespace FitnessTrackerTests
             var birthdayYear = birthdayDate/10000;
             var birthdayMonth = birthdayDate % (birthdayYear * 10000) / 100;
             var birthdayDay = birthdayDate % (birthdayYear * 10000) % (birthdayMonth * 100);
-            var testAthlete = new Athlete("testName", new DateTime(birthdayYear, birthdayMonth, birthdayDay), 80.0f);
+            var testAthlete = new User("testName", new DateTime(birthdayYear, birthdayMonth, birthdayDay), 80.0f);
             var currentDate = DateTime.Now;
             var currentDateInt = currentDate.Year*10000 + currentDate.Month*100 + currentDate.Day;
             var expectedAge = (currentDateInt - birthdayDate) / 10000;

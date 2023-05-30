@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RoSXUzvgTp1EGJIyleJzwjcF45y/ZKxmIL9EuZSf3n0Xjj6YTWTsJQQhRxWJMGHAQykh/AQb4pfmv0SICxD2mg==",
+  "dgSpecHash": "DEWWpYlAjRjnNz0qe+zSDRQPj01Q5PmcqTMSpM5fv00wzp5Z+bRtnFTHzaHt7Y1XCK9X0qqAhG/kS68UxodVPw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kojo8\\Documents\\ASE\\FitnessTrackerTests\\FitnessTrackerTests.csproj",
+  "projectFilePath": "C:\\Users\\kojo8\\Documents\\fitnesstracker\\FitnessTrackerTests\\FitnessTrackerTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kojo8\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
     "C:\\Users\\kojo8\\.nuget\\packages\\microsoft.codecoverage\\16.11.0\\microsoft.codecoverage.16.11.0.nupkg.sha512",

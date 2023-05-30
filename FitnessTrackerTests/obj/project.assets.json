@@ -6107,8 +6107,8 @@
     },
     "FitnessTracker/1.0.0": {
       "type": "project",
-      "path": "../FitnessTracker/FitnessTracker.csproj",
-      "msbuildProject": "../FitnessTracker/FitnessTracker.csproj"
+      "path": "../fitnesstracker-project/FitnessTracker.csproj",
+      "msbuildProject": "../fitnesstracker-project/FitnessTracker.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6126,11 +6126,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kojo8\\Documents\\ASE\\FitnessTrackerTests\\FitnessTrackerTests.csproj",
+      "projectUniqueName": "C:\\Users\\kojo8\\Documents\\fitnesstracker\\FitnessTrackerTests\\FitnessTrackerTests.csproj",
       "projectName": "FitnessTrackerTests",
-      "projectPath": "C:\\Users\\kojo8\\Documents\\ASE\\FitnessTrackerTests\\FitnessTrackerTests.csproj",
+      "projectPath": "C:\\Users\\kojo8\\Documents\\fitnesstracker\\FitnessTrackerTests\\FitnessTrackerTests.csproj",
       "packagesPath": "C:\\Users\\kojo8\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kojo8\\Documents\\ASE\\FitnessTrackerTests\\obj\\",
+      "outputPath": "C:\\Users\\kojo8\\Documents\\fitnesstracker\\FitnessTrackerTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kojo8\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6147,8 +6147,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\kojo8\\Documents\\ASE\\FitnessTracker\\FitnessTracker.csproj": {
-              "projectPath": "C:\\Users\\kojo8\\Documents\\ASE\\FitnessTracker\\FitnessTracker.csproj"
+            "C:\\Users\\kojo8\\Documents\\fitnesstracker\\fitnesstracker-project\\FitnessTracker.csproj": {
+              "projectPath": "C:\\Users\\kojo8\\Documents\\fitnesstracker\\fitnesstracker-project\\FitnessTracker.csproj"
             }
           }
         }
@@ -6200,7 +6200,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
