@@ -12,7 +12,7 @@ namespace FitnessTracker
 {
     public class FitnessTrackerManager
     {
-        public Athlete? User;
+        public User? User;
         public IUserInteraction ui;
         public IDbManager db;
         public FitnessTrackerManager(IUserInteraction ui, IDbManager db)
@@ -38,7 +38,7 @@ namespace FitnessTracker
             ui.Write("Exiting...");
             Environment.Exit(0);
         }
-        public Athlete LoginSuccessful(string username)
+        public User LoginSuccessful(string username)
         {
             if (db.UsernameExists(username))
             {
@@ -65,7 +65,7 @@ namespace FitnessTracker
                 return this.CreateAccount(username);
             }
         }
-        public Athlete CreateAccount(string username)
+        public User CreateAccount(string username)
         {
             return db.GetAthleteByUsername(username);
         }

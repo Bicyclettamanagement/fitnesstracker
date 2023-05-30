@@ -9,6 +9,7 @@ namespace FitnessTracker.Domain
 {
     internal class Exercise : IExercise
     {
+        public int ExerciseId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<IMuscle> Agonists;

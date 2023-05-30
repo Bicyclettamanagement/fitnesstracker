@@ -13,9 +13,9 @@ namespace FitnessTracker.Plugin
         {
             return true;
         }
-        public Athlete GetAthleteByUsername(string username)
+        public User GetAthleteByUsername(string username)
         {
-            Athlete athlete = new Athlete(username, DateTime.Now, 80.0f);
+            User athlete = new User(username, DateTime.Now, 80.0f);
             return athlete;
         }
         public bool UsernameExists(string username)

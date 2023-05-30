@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FitnessTracker.Domain
 {
-    public class Athlete
+    public class User
     {
         public string Name { get; set; }
         public DateTime Birthday { get; }
@@ -15,7 +15,7 @@ namespace FitnessTracker.Domain
         public List<IMuscle>? TrainedMuscles;
         public List<ITrainingPlan>? TrainingPlans;
 
-        public Athlete(string name, DateTime birthday, float weight)
+        public User(string name, DateTime birthday, float weight)
         {
             Name = name;
             Birthday = new DateTime(birthday.Year, birthday.Month, birthday.Day);
