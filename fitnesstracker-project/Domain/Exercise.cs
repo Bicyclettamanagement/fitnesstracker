@@ -12,8 +12,8 @@ namespace FitnessTracker.Domain
         public int ExerciseId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<IMuscle> Agonists;
-        public List<IMuscle> Synergists;
+        public List<Muscle> Agonists;
+        public List<Muscle> Synergists;
         public bool IsUnilateral { get; set; }
         public float CurrentWeight { get; set; }
         public int CurrentReps { get; set; }
@@ -26,12 +26,12 @@ namespace FitnessTracker.Domain
         {
             Name = name;
             Description = "";
-            Agonists = new List<IMuscle>();
-            Synergists = new List<IMuscle>();
+            Agonists = new List<Muscle>();
+            Synergists = new List<Muscle>();
             IsUnilateral = false;
             Notes = "";
         }
-        public Exercise(string name, string description, List<IMuscle> agonists, List<IMuscle> synergists, bool isUnilateral)
+        public Exercise(string name, string description, List<Muscle> agonists, List<Muscle> synergists, bool isUnilateral)
         {
             Name = name;
             Description = description;

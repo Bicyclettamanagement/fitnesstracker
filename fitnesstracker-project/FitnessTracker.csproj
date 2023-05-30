@@ -8,8 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Application\" />
-    <Folder Include="Adapter\" />
+    <Compile Remove="FitnessTrackerManager.cs" />
   </ItemGroup>
 
 </Project>

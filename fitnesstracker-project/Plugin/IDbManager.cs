@@ -9,7 +9,7 @@ namespace FitnessTracker.Plugin
 {
     public interface IDbManager
     {
-        User GetAthleteByUsername(string username);
+        User GetUserByUsername(string username);
         bool PasswordCorrect(string username, string password);
         bool UsernameExists(string username);
     }
