@@ -1,5 +1,4 @@
 ﻿using FitnessTracker.Domain;
-using FitnessTracker.Domain.Musclegroups;
 using System;
 using System.Collections.Generic;
 using System.Linq;

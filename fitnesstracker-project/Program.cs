@@ -11,9 +11,10 @@ static class Program
         IUserRepository userRepository = new UserRepository();
         IWorkoutRepository workoutRepository = new WorkoutRepository();
         ITrainingPlanRepository trainingPlanRepository = new TrainingPlanRepository();
+        IMuscleRepository muscleRepository= new MuscleRepository();
 
         // Erzeugung der Service-Klassen mit den entsprechenden Repositories
-        IAppContainer appContainer = new AppContainer(exerciseRepository, userRepository, workoutRepository, trainingPlanRepository);
+        IAppContainer appContainer = new AppContainer(exerciseRepository, userRepository, workoutRepository, trainingPlanRepository, muscleRepository);
 
         // Erzeugung der Benutzeroberfläche und Übergabe der Service-Klassen
         StartUserInterface consoleUI = new StartUserInterface(appContainer);

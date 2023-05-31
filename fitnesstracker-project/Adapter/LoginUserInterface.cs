@@ -1,4 +1,5 @@
 ﻿using FitnessTracker.Application;
+using FitnessTracker.Domain;
 using FitnessTracker.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -30,18 +31,17 @@ namespace FitnessTracker.Adapter
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
 
-            bool isAuthenticated = _loginUseCase.Execute(username, password);
-
-            if (isAuthenticated)
+            try
             {
+                User user = _loginUseCase.Execute(username, password);
                 Console.WriteLine("Login successful!");
+                _appContainer.SetUser(user);
                 MainMenuUseCase mainMenuUseCase = new MainMenuUseCase(_appContainer);
                 MainMenuUserInterface mainMenuUserInterface = new(_appContainer, mainMenuUseCase);
                 mainMenuUserInterface.ShowMainMenuScreen();
-            }
-            else
+            } catch (Exception ex)
             {
-                Console.WriteLine("Invalid username or password. Please try again.");
+                Console.WriteLine(ex.Message);
             }
 
             Console.WriteLine("Press any key to continue...");

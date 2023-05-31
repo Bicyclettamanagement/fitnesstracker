@@ -35,6 +35,10 @@ namespace FitnessTracker.Application
         {
             return _userRepository.GetById(userId);
         }
+        public User GetUserByName(string username)
+        {
+            return _userRepository.GetUserByUsername(username);
+        }
 
         public List<User> GetAllUsers()
         {

@@ -1,4 +1,5 @@
-﻿using FitnessTracker.Infrastructure;
+﻿using FitnessTracker.Domain;
+using FitnessTracker.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,15 @@ namespace FitnessTracker.Application
             _authenticationService = appContainer.CreateAuthenticationService();
         }
 
-        public bool Execute(string username, string password)
+        public User Execute(string username, string password)   
         {
-            return _authenticationService.LoginSuccessful(username, password);
+            if(_authenticationService.LoginSuccessful(username, password))
+            {
+                return _appContainer.CreateUserService().GetUserByName(username);
+            } else
+            {
+                throw new Exception("Login not successful");
+            }
         }
     }
 

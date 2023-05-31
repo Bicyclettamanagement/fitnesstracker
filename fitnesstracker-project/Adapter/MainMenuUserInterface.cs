@@ -29,7 +29,7 @@ namespace FitnessTracker.Adapter
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("1: Start a Workout");
                 Console.WriteLine("2: View  recent Workouts");
-                Console.WriteLine("3: One-Rep-Max");
+                Console.WriteLine("3: One-Rep-Max (unlock with Pro)");
                 Console.WriteLine("4: Create a new Exercise");
                 Console.WriteLine("5: Create a Training Plan");
                 Console.WriteLine("Esc: Logout");
@@ -37,7 +37,9 @@ namespace FitnessTracker.Adapter
                 switch (input)
                 {
                     case ConsoleKey.D1:
-
+                        CreateWorkoutUseCase createWorkoutUseCase = new CreateWorkoutUseCase(_appContainer);
+                        CreateWorkoutUserInterface createWorkoutUserInterface = new(_appContainer, createWorkoutUseCase);
+                        createWorkoutUserInterface.ShowTrainingPlanDecisionScreen();
                         break;
                     case ConsoleKey.D2:
 

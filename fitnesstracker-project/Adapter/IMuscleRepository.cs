@@ -1,5 +1,4 @@
 ﻿using FitnessTracker.Domain;
-using FitnessTracker.Domain.Musclegroups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +13,7 @@ namespace FitnessTracker.Adapter
         void Add(Muscle muscle);
         void Delete(int muscleId);
         Muscle GetById(int muscleId);
+        Muscle GetByName(string name);
         List<Muscle> GetAll();
         void Update(Muscle muscle);
     }

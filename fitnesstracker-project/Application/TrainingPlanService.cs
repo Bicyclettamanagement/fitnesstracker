@@ -15,10 +15,13 @@ namespace FitnessTracker.Application
         {
             _trainingPlanRepository= trainingPlanRepository;
         }
-        public void CreateTrainingPlan(string name, List<int> exercises)
+        public void CreateTrainingPlan(TrainingPlan trainingPlan)
         {
-            TrainingPlan trainingPlan = new TrainingPlan(name, exercises);
-            // todo
+            _trainingPlanRepository.Save(trainingPlan);
+        }
+        public List<TrainingPlan> GetTrainingPlans()
+        {
+            return _trainingPlanRepository.GetAll();
         }
     }
     
