@@ -1,4 +1,5 @@
 ﻿using FitnessTracker.Application;
+using FitnessTracker.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,21 @@ namespace FitnessTracker.Adapter
 {
     public class LoginUserInterface
     {
+        private readonly IAppContainer _appContainer;
         private readonly LoginUseCase _loginUseCase;
 
-        public LoginUserInterface(LoginUseCase loginUseCase)
+        public LoginUserInterface(IAppContainer appContainer, LoginUseCase loginUseCase)
         {
+            _appContainer = appContainer;
             _loginUseCase = loginUseCase;
         }
 
         public void ShowLoginScreen()
         {
+            Console.Clear();
+            Console.WriteLine("FitnessTracker");
+            Console.WriteLine("Login");
+            Console.WriteLine();
             Console.WriteLine("Enter username:");
             string username = Console.ReadLine();
             Console.WriteLine("Enter password:");
@@ -28,7 +35,9 @@ namespace FitnessTracker.Adapter
             if (isAuthenticated)
             {
                 Console.WriteLine("Login successful!");
-                // Continue
+                MainMenuUseCase mainMenuUseCase = new MainMenuUseCase(_appContainer);
+                MainMenuUserInterface mainMenuUserInterface = new(_appContainer, mainMenuUseCase);
+                mainMenuUserInterface.ShowMainMenuScreen();
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessTracker.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,13 @@ namespace FitnessTracker.Application
 {
     public class LoginUseCase
     {
+        private readonly IAppContainer _appContainer;
         private readonly AuthenticationService _authenticationService;
 
-        public LoginUseCase(AuthenticationService authenticationService)
+        public LoginUseCase(IAppContainer appContainer)
         {
-            _authenticationService = authenticationService;
+            _appContainer = appContainer;
+            _authenticationService = appContainer.CreateAuthenticationService();
         }
 
         public bool Execute(string username, string password)

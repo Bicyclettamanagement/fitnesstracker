@@ -1,4 +1,5 @@
 ﻿using FitnessTracker.Domain;
+using FitnessTracker.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,13 +11,15 @@ namespace FitnessTracker.Application
 {
     public class RegisterUseCase
     {
+        private readonly IAppContainer _appContainer;
         private readonly UserService _userService;
         private readonly AuthenticationService _authenticationService;
 
-        public RegisterUseCase(UserService userService, AuthenticationService authenticationService)
+        public RegisterUseCase(IAppContainer appContainer)
         {
-            _userService = userService;
-            _authenticationService = authenticationService;
+            _appContainer = appContainer;
+            _userService = appContainer.CreateUserService();
+            _authenticationService = appContainer.CreateAuthenticationService();
         }
 
         public void Execute(string username, string password, string birthday, string weight)

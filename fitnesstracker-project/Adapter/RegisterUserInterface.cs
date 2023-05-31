@@ -1,5 +1,6 @@
 ﻿using FitnessTracker.Application;
 using FitnessTracker.Domain;
+using FitnessTracker.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,18 @@ namespace FitnessTracker.Adapter
 {
     public class RegisterUserInterface
     {
+        private readonly IAppContainer _appContainer;
         private readonly RegisterUseCase _registerUseCase;
-        public RegisterUserInterface(RegisterUseCase registerUseCase)
+        public RegisterUserInterface(IAppContainer appContainer, RegisterUseCase registerUseCase)
         {
+            _appContainer = appContainer;
             _registerUseCase = registerUseCase;
         }
         public void ShowRegisterScreen()
         {
             Console.Clear();
             Console.WriteLine("Fitnesstracker");
+            Console.WriteLine("Register");
             Console.WriteLine();
             Console.WriteLine("Enter username:");
             string username = Console.ReadLine();

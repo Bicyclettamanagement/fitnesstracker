@@ -1,4 +1,5 @@
 ﻿using FitnessTracker.Application;
+using FitnessTracker.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +10,16 @@ namespace FitnessTracker.Adapter
 {
     public class StartUserInterface
     {
+        private readonly IAppContainer _appContainer;
         private readonly UserService _userService;
         private readonly AuthenticationService _authenticationService;
-        private readonly WorkoutService _workoutService;
-        private readonly TrainingPlanService _trainingPlanService;
 
 
-        public StartUserInterface(UserService userService, WorkoutService workoutService, TrainingPlanService trainingPlanService, AuthenticationService authenticationService)
+        public StartUserInterface(IAppContainer appContainer)
         {
-            _userService = userService;
-            _workoutService = workoutService;
-            _trainingPlanService = trainingPlanService;
-            _authenticationService = authenticationService;
+            _appContainer= appContainer;
+            _userService = appContainer.CreateUserService();
+            _authenticationService= appContainer.CreateAuthenticationService();
         }
 
         public void Run()
@@ -30,23 +29,23 @@ namespace FitnessTracker.Adapter
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to Fitnesstracker!");
-                Console.WriteLine("1. Login");
-                Console.WriteLine("2. Register");
+                Console.WriteLine("1: Login");
+                Console.WriteLine("2: Register");
                 Console.WriteLine("");
                 Console.WriteLine("Esc: Exit");
-                Console.WriteLine("Choose an option:");
+                Console.WriteLine("Press a key to choose an option");
 
                 ConsoleKey input = Console.ReadKey(true).Key;
                 switch (input)
                 {
                     case ConsoleKey.D1:
-                        var loginUseCase = new LoginUseCase(_authenticationService);
-                        var loginUserInterface = new LoginUserInterface(loginUseCase);
+                        var loginUseCase = new LoginUseCase(_appContainer);
+                        var loginUserInterface = new LoginUserInterface(_appContainer, loginUseCase);
                         loginUserInterface.ShowLoginScreen();
                         break;
                     case ConsoleKey.D2:
-                        var registerUseCase = new RegisterUseCase(_userService, _authenticationService);
-                        var registerUserInterface = new RegisterUserInterface(registerUseCase);
+                        var registerUseCase = new RegisterUseCase(_appContainer);
+                        var registerUserInterface = new RegisterUserInterface(_appContainer, registerUseCase);
                         registerUserInterface.ShowRegisterScreen();
 
                         break;

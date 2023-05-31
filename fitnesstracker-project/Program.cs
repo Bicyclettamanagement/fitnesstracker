@@ -1,5 +1,6 @@
 ﻿using FitnessTracker.Adapter;
 using FitnessTracker.Application;
+using FitnessTracker.Infrastructure;
 
 static class Program
 {
@@ -12,14 +13,10 @@ static class Program
         ITrainingPlanRepository trainingPlanRepository = new TrainingPlanRepository();
 
         // Erzeugung der Service-Klassen mit den entsprechenden Repositories
-        ExerciseService exerciseService = new ExerciseService(exerciseRepository);
-        UserService userService = new UserService(userRepository);
-        WorkoutService workoutService = new WorkoutService(workoutRepository);
-        TrainingPlanService trainingPlanService = new TrainingPlanService(trainingPlanRepository);
-        AuthenticationService authenticationService = new AuthenticationService(userRepository);
+        IAppContainer appContainer = new AppContainer(exerciseRepository, userRepository, workoutRepository, trainingPlanRepository);
 
         // Erzeugung der Benutzeroberfläche und Übergabe der Service-Klassen
-        StartUserInterface consoleUI = new StartUserInterface(userService, workoutService, trainingPlanService, authenticationService);
+        StartUserInterface consoleUI = new StartUserInterface(appContainer);
 
         // Starten der Benutzeroberfläche
         consoleUI.Run();
