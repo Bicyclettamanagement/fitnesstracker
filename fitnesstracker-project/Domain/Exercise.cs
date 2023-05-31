@@ -11,7 +11,7 @@ namespace FitnessTracker.Domain
     {
         public int ExerciseId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
         public List<int> Agonists;
         public List<int> Synergists;
         public bool IsUnilateral { get; set; }

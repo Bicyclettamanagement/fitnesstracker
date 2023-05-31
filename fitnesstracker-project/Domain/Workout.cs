@@ -18,7 +18,7 @@ namespace FitnessTracker.Domain
         public List<PerformedExercise> PerformedExercises { get; set; }
         
 
-        public Workout(WorkoutService workoutService)
+        public Workout(IWorkoutService workoutService)
         {
             _workoutService = workoutService;
             Date= DateTime.Now;
