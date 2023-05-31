@@ -3,3 +3,6 @@ The fitness tracker application is a console application that allows users to tr
 
 ## Starting the Application
 The Application can be started using the scripts in "fitnesstracker/fitnesstracker-project" "start.bat" (Windows) or "start.sh" (Linux).
+
+## Task Sheet
+The task sheet for the elaboration of the project "VorlageAusarbeitung.pdf" can be found in the folder "fitnesstracker/Formales".
