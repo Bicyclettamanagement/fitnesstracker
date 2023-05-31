@@ -1,0 +1,3 @@
+ExerciseId,Name,Description,Agonist,Synergist,IsUnilateral,OneRepMax
+0,Pushup,Just a normal Pushup,0,,false,0
+0,Pushup,Just a normal Pushup,1,,false,0

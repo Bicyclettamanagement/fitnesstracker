@@ -28,10 +28,10 @@ namespace FitnessTracker.Adapter
                 Console.WriteLine();
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("1: Start a Workout");
-                Console.WriteLine("2: View  recent Workouts");
+                Console.WriteLine("2: View  recent Workouts (unlock with Pro)");
                 Console.WriteLine("3: One-Rep-Max (unlock with Pro)");
-                Console.WriteLine("4: Create a new Exercise");
-                Console.WriteLine("5: Create a Training Plan");
+                Console.WriteLine("4: Create a new Exercise (unlock with Pro)");
+                Console.WriteLine("5: Create a Training Plan (unlock with Pro)");
                 Console.WriteLine("Esc: Logout");
                 ConsoleKey input = Console.ReadKey(true).Key;
                 switch (input)

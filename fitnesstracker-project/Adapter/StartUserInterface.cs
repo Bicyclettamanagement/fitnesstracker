@@ -60,29 +60,7 @@ namespace FitnessTracker.Adapter
         }
 
 
-        private void CreateWorkout()
-        {
-            Console.WriteLine("Enter workout details:");
-            // todo
-
-            //_workoutService.CreateWorkout(/* Übergebene Parameter */);
-
-            Console.WriteLine("Workout created successfully!");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-        }
-
-        private void CreateTrainingPlan()
-        {
-            Console.WriteLine("Enter training plan details:");
-            // todo
-
-            //_trainingPlanService.CreateTrainingPlan(/* Übergebene Parameter */);
-
-            Console.WriteLine("Training plan created successfully!");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-        }
+        
     }
 
 }
