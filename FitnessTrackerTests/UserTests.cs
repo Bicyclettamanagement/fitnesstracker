@@ -14,6 +14,7 @@ namespace FitnessTrackerTests
     {
         [Theory]
         [InlineData(20010227)]
+        [InlineData(00110101)]
         public void GetAge_ReturnCorrectAge(int birthdayDate)
         {
             var birthdayYear = birthdayDate/10000;

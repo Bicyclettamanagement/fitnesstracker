@@ -28,7 +28,7 @@ namespace FitnessTracker.Adapter
                 Console.WriteLine();
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("1: Start a Workout");
-                Console.WriteLine("2: View  recent Workouts (unlock with Pro)");
+                Console.WriteLine("2: View  recent Workouts (unlock with Pro)"); // Ich hoffe, dass Sie das mit Humor sehen können :)
                 Console.WriteLine("3: One-Rep-Max (unlock with Pro)");
                 Console.WriteLine("4: Create a new Exercise (unlock with Pro)");
                 Console.WriteLine("5: Create a Training Plan (unlock with Pro)");
@@ -42,7 +42,7 @@ namespace FitnessTracker.Adapter
                         createWorkoutUserInterface.ShowTrainingPlanDecisionScreen();
                         break;
                     case ConsoleKey.D2:
-
+                        // only with Pro :/
                         break;
                     case ConsoleKey.D3:
                         break;

@@ -125,41 +125,7 @@ namespace FitnessTracker.Adapter
 
         public Workout GetById(int workoutId)
         {
-            Workout? workout = null;
-            List<string> lines = File.ReadAllLines(FilePath).ToList();
-
-            // Überspringen der Kopfzeile
-            lines.RemoveAt(0);
-            for (int i = lines.Count - 1; i >= 0; i--)
-            {
-                string line = lines[i];
-                string[] fields = line.Split(',');
-                
-
-                if (fields.Length >= 2)
-                {
-                    int currentWorkoutId = int.Parse(fields[0]);
-
-                    if (currentWorkoutId == workoutId)
-                    {
-                        if (workout == null)
-                        {
-                            string name = fields[1];
-                            DateTime date = DateTime.Parse(fields[2]);
-                            workout = new Workout(workoutId, name, date);
-                        }
-                        
-                        int exerciseId = int.Parse(fields[3]);
-                        int repetitions = int.Parse(fields[4]);
-                        int weight = int.Parse(fields[5]);
-                        var exercise = new PerformedExercise(exerciseId, repetitions, weight);
-                        workout.AddExercise(exercise);
-
-                        
-                        
-                    }
-                }
-            }
+            Workout? workout = searchWorkout(workoutId);
 
             if (workout != null)
             {
@@ -186,7 +152,44 @@ namespace FitnessTracker.Adapter
             }
 
         }
+        private Workout searchWorkout(int workoutId)
+        {
+            List<string> lines = File.ReadAllLines(FilePath).ToList();
+            Workout? workout = null;
+            // Überspringen der Kopfzeile
+            lines.RemoveAt(0);
+            for (int i = lines.Count - 1; i >= 0; i--)
+            {
+                string line = lines[i];
+                string[] fields = line.Split(',');
 
+
+                if (fields.Length >= 2)
+                {
+                    int currentWorkoutId = int.Parse(fields[0]);
+
+                    if (currentWorkoutId == workoutId)
+                    {
+                        if (workout == null)
+                        {
+                            string name = fields[1];
+                            DateTime date = DateTime.Parse(fields[2]);
+                            workout = new Workout(workoutId, name, date);
+                        }
+
+                        int exerciseId = int.Parse(fields[3]);
+                        int repetitions = int.Parse(fields[4]);
+                        int weight = int.Parse(fields[5]);
+                        var exercise = new PerformedExercise(exerciseId, repetitions, weight);
+                        workout.AddExercise(exercise);
+
+
+
+                    }
+                }
+            }
+            return workout;
+        }
     }
 
 }
