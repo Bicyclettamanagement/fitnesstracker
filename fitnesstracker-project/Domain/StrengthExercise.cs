@@ -11,5 +11,6 @@ namespace FitnessTracker.Domain
         public StrengthExercise(string name) : base(name)
         {
         }
+        public override string Description => "Strength Exercise";
     }
 }
