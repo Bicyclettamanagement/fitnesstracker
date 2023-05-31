@@ -28,7 +28,7 @@ namespace FitnessTracker.Adapter
         }
         public void Add(Exercise exercise)
         {
-            int exerciseId = GetHighestId() + 1;
+            int exerciseId = RepositoryHelper.GetHighestId(FilePath) + 1;
             foreach (var agonist in exercise.Agonists)
             {
                 // public Exercise(string name, string description, List<Muscle> agonists, List<Muscle> synergists, bool isUnilateral, int oneRepMax)
@@ -224,34 +224,6 @@ namespace FitnessTracker.Adapter
                     writer.WriteLine(data);
                 }
             }
-        }
-        private int GetHighestId()
-        {
-            int highestId = 0;
-
-            using (StreamReader reader = new StreamReader(FilePath))
-            {
-                // Überspringen der Kopfzeile
-                reader.ReadLine();
-
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] fields = line.Split(',');
-
-                    if (fields.Length >= 2)
-                    {
-                        int workoutId = int.Parse(fields[0]);
-
-                        if (workoutId > highestId)
-                        {
-                            highestId = workoutId;
-                        }
-                    }
-                }
-            }
-
-            return highestId;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FitnessTracker.Adapter
 {
     public class RepositoryHelper
     {
-        public int GetHighestId(string filePath)
+        public static int GetHighestId(string filePath)
         {
             int highestId = 0;
 

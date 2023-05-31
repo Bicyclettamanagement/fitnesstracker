@@ -28,7 +28,7 @@ namespace FitnessTracker.Adapter
         }
         public void Create(User user)
         {
-            int userId = GetHighestId() + 1;
+            int userId = RepositoryHelper.GetHighestId(FilePath) + 1;
 
             string data = $"{userId},{user.Username},{user.Password},{user.Birthday.ToShortDateString()},{user.Weight}";
 
@@ -232,33 +232,6 @@ namespace FitnessTracker.Adapter
                 writer.WriteLine(data);
             }
         }
-        private int GetHighestId()
-        {
-            int highestId = 0;
-
-            using (StreamReader reader = new StreamReader(FilePath))
-            {
-                // Überspringen der Kopfzeile
-                reader.ReadLine();
-
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] fields = line.Split(',');
-
-                    if (fields.Length >= 2)
-                    {
-                        int workoutId = int.Parse(fields[0]);
-
-                        if (workoutId > highestId)
-                        {
-                            highestId = workoutId;
-                        }
-                    }
-                }
-            }
-
-            return highestId;
-        }
+        
     }
 }

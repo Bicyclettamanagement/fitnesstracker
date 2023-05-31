@@ -28,7 +28,7 @@ namespace FitnessTracker.Adapter
         }
         public void Add(Muscle muscle)
         {
-            int muscleId = GetHighestId() + 1;
+            int muscleId = RepositoryHelper.GetHighestId(FilePath) + 1;
             string data = $"{muscleId},{muscle.Name},{muscle.RecommendedVolumePerWeek}";
             using (StreamWriter writer = new StreamWriter(FilePath, true))
             {
@@ -185,33 +185,6 @@ namespace FitnessTracker.Adapter
                 writer.WriteLine(data);
             }
         }
-        private int GetHighestId()
-        {
-            int highestId = 0;
-
-            using (StreamReader reader = new StreamReader(FilePath))
-            {
-                // Überspringen der Kopfzeile
-                reader.ReadLine();
-
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] fields = line.Split(',');
-
-                    if (fields.Length >= 2)
-                    {
-                        int Id = int.Parse(fields[0]);
-
-                        if (Id > highestId)
-                        {
-                            highestId = Id;
-                        }
-                    }
-                }
-            }
-
-            return highestId;
-        }
+        
     }
 }
