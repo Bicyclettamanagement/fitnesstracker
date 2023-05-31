@@ -29,7 +29,7 @@ namespace FitnessTracker.Adapter
 
         public void Add(Workout workout)
         {
-            int workoutId = GetHighestId() +1;
+            int workoutId = RepositoryHelper.GetHighestId(FilePath) +1;
             foreach (var exercise in workout.PerformedExercises)
             {
                 string data = $"{workoutId},{workout.UserId},{workout.Name},{workout.Date.ToShortTimeString()},{exercise},{exercise.Repetitions},{exercise.Weight}";
@@ -185,34 +185,6 @@ namespace FitnessTracker.Adapter
                 }
             }
 
-        }
-        private int GetHighestId()
-        {
-            int highestId = 0;
-
-            using (StreamReader reader = new StreamReader(FilePath))
-            {
-                // Überspringen der Kopfzeile
-                reader.ReadLine();
-
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] fields = line.Split(',');
-
-                    if (fields.Length >= 2)
-                    {
-                        int workoutId = int.Parse(fields[0]);
-
-                        if (workoutId > highestId)
-                        {
-                            highestId = workoutId;
-                        }
-                    }
-                }
-            }
-
-            return highestId;
         }
 
     }
